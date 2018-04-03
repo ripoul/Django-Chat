@@ -75,9 +75,15 @@
                                             </div>
                                         </div> -->
                                     </form>
-                                    <form id="register-form" action="/chat/createUser/" method="post" role="form" style="display: none;"> {% csrf_token %}
+                                    <form id="register-form" action="/chat/createUser/" method="post" role="form" style="display: none;" enctype="multipart/form-data"> {% csrf_token %}
                                         <div class="form-group">
                                             <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" required>
+                                        </div>
+                                        <div class="form-group">
+                                                <input type="text" name="firstname" id="firstname" tabindex="1" class="form-control" placeholder="firstname" value="" required>
+                                        </div>
+                                        <div class="form-group">
+                                                <input type="text" name="lastname" id="lastname" tabindex="1" class="form-control" placeholder="lastname" value="" required>
                                         </div>
                                         <div class="form-group">
                                             <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="" required>
@@ -91,7 +97,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="icone">Photo de profile (JPG, PNG ou GIF | max. 15 Ko) :</label>
-                                            <input type="file" name="icone" id="icone" accept="image/x-png,image/gif,image/jpeg" required/>
+                                            <input type="file" name="pp" id="icone" accept="image/x-png,image/gif,image/jpeg" required/>
                                         </div>
                                         <div class="form-group">
                                             <div class="row">

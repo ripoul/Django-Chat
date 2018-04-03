@@ -1,2 +1,4 @@
 *.pyc
 .vscode/*
+*sqlite3
+*.jpeg
