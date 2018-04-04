@@ -1,14 +1,92 @@
 <!DOCTYPE html>
+{% load static %}
+{% load img %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Chat</title>
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'chat/index.css' %}">
 </head>
 <body>
-    le chat
-    
-    <a href="/chat/disconect/">disconect</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <span class="glyphicon glyphicon-comment"></span> Chat
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-chevron-down"></span>
+                            </button>
+                            <ul class="dropdown-menu slidedown">
+                                <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-refresh">
+                                </span>Refresh</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/chat/disconect/"><span class="glyphicon glyphicon-off"></span>
+                                    Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="chat">
+                            {% for message in msg %}
+
+                            {% ifequal message.user user.profile %}
+                            <li class="right clearfix"><span class="chat-img pull-right">
+                                {% with image_static=message.user.photo|getImgName %}
+                                <img src="{% static image_static %}" alt="User Avatar" class="img-circle" style="width:50px;"/>
+                                {% endwith %}
+                            </span>
+                                <div class="chat-body clearfix">
+                                    <div class="header">
+                                        <strong class="primary-font">{{message.user}}</strong> <a href="#">supprimer message</a> <small class="pull-right text-muted">
+                                            <span class="glyphicon glyphicon-time"></span>{{message.pub_date}}</small>
+                                    </div>
+                                    <p class="pull-right">
+                                        {{message.msg}}
+                                    </p>
+                                </div>
+                            </li>
+                            {% else %}
+                            
+                            <li className="left clearfix">
+                                    <span className="chat-img pull-left">
+                                        {% with image_static=message.user.photo|getImgName %}
+                                        <img src="{% static image_static %}" alt="User Avatar" class="img-circle" style="width:50px;"/>
+                                        {% endwith %}
+                                    </span>
+                                    <div className="chat-body clearfix">
+                                      <div className="header">
+                                        <strong className="primary-font">{{message.user}}</strong> <small className="pull-left text-muted">
+                                          <span className="glyphicon glyphicon-time"></span>{{message.pub_date}}</small>
+                                      </div>
+                                      <p>{{message.msg}}</p>
+                                    </div>
+                                  </li>
+
+                            {% endifequal %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="input-group">
+                            <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                            <span class="input-group-btn">
+                                <button class="btn btn-warning btn-sm" id="btn-chat">
+                                    Send</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

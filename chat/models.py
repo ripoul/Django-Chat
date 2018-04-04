@@ -26,7 +26,7 @@ class Profile(models.Model):
 class Message(models.Model):
     msg = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.__str__() + " : " + self.msg

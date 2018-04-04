@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Message
 
 import string
 import random
@@ -18,7 +18,14 @@ import random
 
 @login_required(login_url='/chat/login/')
 def index(request):
-    context={}
+    msg = Message.objects.all()
+    user = request.user
+
+    context={
+        "msg":msg,
+        "user":user
+    }
+    
     return render(request, 'chat/index.html', context)
     #return HttpResponse("ici sera le chat")
 
@@ -52,17 +59,23 @@ def createUser(request):
     email = request.POST['email']
     password = request.POST['password']
 
-    ppstr = handle_uploaded_file(request.FILES['pp'])
-
-    user = User.objects.create_user(username=username,
+    try:
+        user = User.objects.create_user(username=username,
                                  email=email,
                                  password=password)
-    user.first_name=firstname
-    user.last_name=lastname
-    user.profile.photo=ppstr
-    user.save()
+    
+        ppstr = handle_uploaded_file(request.FILES['pp'])
+        user.first_name=firstname
+        user.last_name=lastname
+        user.profile.photo=ppstr
+        user.save()
 
-    return HttpResponse("wip")
+        login(request, user)
+        return redirect('/chat/')
+
+    except:
+        context = { "error" : "erreur creation profile"}
+        return render(request, 'chat/login.html', context)
 
 
 def handle_uploaded_file(f):
