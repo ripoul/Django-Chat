@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^disconect/$', views.disconect, name='disconect'),
     url(r'^createUser/$', views.createUser, name='createUser'),
     url(r'^sendMessage/$', views.sendMessage, name='sendMessage'),
+    url(r'^deleteMessage/$', views.deleteMessage, name='deleteMessage'),
 ]

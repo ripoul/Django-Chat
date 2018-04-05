@@ -103,3 +103,11 @@ def sendMessage(request):
         objMessage.save()
 
     return redirect('/chat/')
+
+@login_required(login_url='/chat/login/')
+def deleteMessage(request):
+    #check if you have the right to delete the msg
+    if request.method == 'GET':
+        id = request.GET['msgID']
+        Message.objects.get(pk=id).delete()
+    return redirect('/chat/')
