@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^connect/$', views.Connect, name='connect'),
     url(r'^disconect/$', views.disconect, name='disconect'),
     url(r'^createUser/$', views.createUser, name='createUser'),
+    url(r'^sendMessage/$', views.sendMessage, name='sendMessage'),
 ]

@@ -37,7 +37,6 @@
                     <div class="panel-body">
                         <ul class="chat">
                             {% for message in msg %}
-
                             {% ifequal message.user user.profile %}
                             <li class="right clearfix"><span class="chat-img pull-right">
                                 {% with image_static=message.user.photo|getImgName %}
@@ -77,11 +76,12 @@
                     </div>
                     <div class="panel-footer">
                         <div class="input-group">
-                            <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                            <form method="POST" action="/chat/sendMessage/">{% csrf_token %}
+                            <input name="msg" id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
                             <span class="input-group-btn">
-                                <button class="btn btn-warning btn-sm" id="btn-chat">
-                                    Send</button>
+                                <input type="submit" class="btn btn-warning btn-sm" id="btn-chat"/>
                             </span>
+                            </form>
                         </div>
                     </div>
                 </div>

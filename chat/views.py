@@ -14,6 +14,7 @@ from .models import Profile, Message
 
 import string
 import random
+import datetime
 
 
 @login_required(login_url='/chat/login/')
@@ -27,7 +28,6 @@ def index(request):
     }
     
     return render(request, 'chat/index.html', context)
-    #return HttpResponse("ici sera le chat")
 
 def loginView(request):
     context = {}
@@ -89,3 +89,17 @@ def handle_uploaded_file(f):
 
 def id_generator(size=6, chars=string.ascii_uppercase):
     return ''.join(random.choice(chars) for _ in range(size))
+
+@login_required(login_url='/chat/login/')
+def sendMessage(request):
+    if request.method == 'POST':
+        msg = request.POST['msg']
+        pub_date = datetime.datetime.now()
+        user = request.user
+
+        profile = Profile.objects.get(user=user)
+
+        objMessage = Message(msg=msg, pub_date=pub_date, user=profile)
+        objMessage.save()
+
+    return redirect('/chat/')
