@@ -16,3 +16,20 @@ $(function() {
 	});
 
 });
+
+function checkPasswordMatch() {
+	var password = $("#password1").val();
+	var confirmPassword = $("#confirm-password").val();
+
+	console.log(password);
+	console.log(confirmPassword);
+
+	if (password != confirmPassword){
+		$("#divCheckPasswordMatch").html("Passwords do not match!");
+		document.getElementById('register-submit').disabled = true;
+	}
+	else{
+		$("#divCheckPasswordMatch").html("Passwords match.");
+		document.getElementById('register-submit').disabled = false;
+	}
+}

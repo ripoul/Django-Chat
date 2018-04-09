@@ -7,25 +7,6 @@
 
         <link rel="stylesheet" href="{% static 'chat/login.css' %}">
         <script src="{% static 'chat/login.js' %}"></script>
-
-        <script>
-            function checkPasswordMatch() {
-                var password = $("#password1").val();
-                var confirmPassword = $("#confirm-password").val();
-
-                console.log(password);
-                console.log(confirmPassword);
-
-                if (password != confirmPassword){
-                    $("#divCheckPasswordMatch").html("Passwords do not match!");
-                    document.getElementById('register-submit').disabled = true;
-                }
-                else{
-                    $("#divCheckPasswordMatch").html("Passwords match.");
-                    document.getElementById('register-submit').disabled = false;
-                }
-            }
-        </script>
     </head>
     <body>
         {% if error %}

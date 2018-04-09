@@ -13,8 +13,9 @@
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="{% static 'chat/index.css' %}">
+    <script src="{% static 'chat/index.js' %}"></script>
 </head>
-<body>
+<body onload="updateScroll()">
     <div class="container">
         <div class="row">
             <div class="col-md-5">
@@ -34,7 +35,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body" id="toScroll">
                         <ul class="chat">
                             {% for message in msg %}
                             {% ifequal message.user user.profile %}
