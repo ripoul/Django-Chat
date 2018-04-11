@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Select Room</title>
+</head>
+<body>
+    <form action="{% url 'joinRoom' %}" method="post">{% csrf_token %}
+        <select name="room">
+            {% for r in room %}
+                <option value="{{r.id}}">{{r.name}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit">
+    </form>
+
+    <a href="{% url 'createRoomForm' %}">Or create new one</a>
+</body>
+</html>

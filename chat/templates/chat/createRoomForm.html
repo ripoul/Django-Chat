@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{% url 'createRoom' %}" method="POST"> {% csrf_token %}
+        Name : <input type="text" name="name" value=""><br>
+        User authorisé : <br>
+        {% for profile in profiles %}
+            <input type="checkbox" name="user" value="{{profile.id}}"> {{profile}}<br>
+        {% endfor %}
+        <input type="submit">
+    </form>
+</body>
+</html>

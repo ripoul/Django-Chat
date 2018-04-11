@@ -21,7 +21,7 @@
             <div class="col-md-5">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <span class="glyphicon glyphicon-comment"></span> Chat
+                        <span class="glyphicon glyphicon-comment"></span> {{room.name}}
                         <div class="btn-group pull-right">
                             <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
                                 <span class="glyphicon glyphicon-chevron-down"></span>
@@ -46,7 +46,7 @@
                             </span>
                                 <div class="chat-body clearfix">
                                     <div class="header">
-                                        <strong class="primary-font">{{message.user}}</strong> <a href="/chat/deleteMessage?msgID={{message.id}}">supprimer message</a> <small class="pull-right text-muted">
+                                        <strong class="primary-font">{{message.user}}</strong> <a href="/chat/deleteMessage?msgID={{message.id}}&roomID={{room.id}}">supprimer message</a> <small class="pull-right text-muted">
                                             <span class="glyphicon glyphicon-time"></span>{{message.pub_date}}</small>
                                     </div>
                                     <p class="pull-right">
@@ -82,6 +82,7 @@
                             <span class="input-group-btn">
                                 <input type="submit" class="btn btn-warning btn-sm" id="btn-chat"/>
                             </span>
+                            <input type="hidden" name="room" value="{{room.id}}"></input>
                             </form>
                         </div>
                     </div>

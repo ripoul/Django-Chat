@@ -23,10 +23,18 @@ class Profile(models.Model):
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
 
+class Room(models.Model):
+    name = models.CharField(max_length=200)
+    user = models.ManyToManyField(Profile)
+
+    def __str__(self):
+        return self.name
+
 class Message(models.Model):
     msg = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.__str__() + " : " + self.msg
